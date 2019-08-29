@@ -1,0 +1,93 @@
+.bg {
+  position: absolute;
+  top: 0px;
+  //height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.bg-img {
+  position: absolute;
+  height: 90%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.fly-in-img {
+  padding: 5px;
+}
+
+form {
+  width: 95%;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-control:focus {
+  outline: none !important;
+  border: 0.6px solid rgb(0, 132, 137);
+  box-shadow: 0 0 4px rgb(0, 132, 137);
+}
+
+.form-control {
+  position: relative;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 5px;
+  height: 55px;
+  border-color: rgb(0, 132, 137);
+  border-width: 0.6px;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.social-img {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  left: 10px;
+}
+
+.socail-btns {
+  width: 100%;
+  text-align: center;
+}
+
+.social-btn {
+  width: 98%;
+  height: 55px;
+  color: rgb(0, 0, 0);
+  --background: white;
+  font-size: 0.8rem;
+  border-width: 1.3px;
+  margin: 10px 0px;
+  --background-activated: white;
+  --color-activated: rgb(0, 132, 137);
+}
+
+.login-btn {
+  width: 98%;
+  height: 50px;
+  color: white;
+  --background: rgb(0, 132, 137);
+  border-radius: 7px;
+  font-size: 0.8rem;
+  margin: 10px 0px;
+  font-weight: bold;
+  --background-activated: white;
+  --color-activated: rgb(0, 132, 137);
+}
+
+.check-box-container {
+  width: 100%;
+  display: flex;
+}
+
+.nav-link {
+  color: rgb(0, 132, 137);
+}

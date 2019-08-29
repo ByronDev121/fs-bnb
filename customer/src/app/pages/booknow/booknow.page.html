@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar class="toolbar-container">
+    <div class="flex-toolbar">
+      <div class="back-arrow" (click)="navBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </div>
+      <div class="header">
+        <ion-title>Booking</ion-title>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-colour">
+  <div>
+    <ion-slides class="slides" pager="true">
+      <ion-slide *ngFor="let img of listing.imgUrl">
+        <img src="{{img}}" />
+      </ion-slide>
+    </ion-slides>
+
+    <ion-item>
+      <div style="padding: 10px 20px 10px 20px">
+        <p class="location">{{listing.location}}</p>
+        <h4 class="title">{{listing.name}}</h4>
+        <p class="price">R{{listing.price}}/night</p>
+      </div>
+    </ion-item>
+
+    <ion-item-divider style="background-color: lightgrey; margin-top: 10px; color:rgb(0, 132, 137)">
+      <ion-label>
+        Select Your Dates:
+      </ion-label>
+    </ion-item-divider>
+
+    <div>
+      <ion-item class=" date-item">
+        <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+        <input class="form-control" matInput [matDatepicker]="dateFrom" [(ngModel)]="booking.dateFrom"
+          placeholder="Check in date">
+        <mat-datepicker touchUi #dateFrom></mat-datepicker>
+      </ion-item>
+
+      <ion-item class="date-item">
+        <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+        <input class="form-control" matInput [matDatepicker]="dateTo" [(ngModel)]="booking.dateTo"
+          placeholder="Check out date">
+        <mat-datepicker touchUi #dateTo></mat-datepicker>
+      </ion-item>
+
+    </div>
+
+    <ion-item-divider style="background-color: lightgrey; margin-top: 10px; color:rgb(0, 132, 137)">
+      <ion-label>
+        Write a greeting to your host:
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-textarea rows="4" placeholder='Hi hostName. I am looking forward to staying in your awesome apartment'
+          [(ngModel)]="newMessage.text"></ion-textarea>
+      </ion-item>
+    </ion-card-content>
+  </div>
+
+</ion-content>
+
+<ion-footer style="padding:10px">
+  <ion-grid>
+    <ion-row>
+      <ion-button style="width:100%" size="medium" (click)="book()">Request Booking</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

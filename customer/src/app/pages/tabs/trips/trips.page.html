@@ -1,0 +1,74 @@
+<ion-header class="header" [@flyInOutTop]="tabsShow">
+  <ion-toolbar>
+    <ion-title class="img-container">
+      <img class="header-img" src="assets/fs-bnb-logo.png">
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="title">
+      Trips
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="openCloseTabs($event)" class="background-colour">
+
+  <div class="content-position">
+    <div>
+      <div>
+        <h4>
+          Upcoming Travel
+        </h4>
+      </div>
+
+      <div>
+        <img src="assets/no-trips.jpg">
+        Note that you have no upcoming trips. <br>
+        <ion-button class="btn" (click)="navToExplore()">Explore AirBnB</ion-button>
+      </div>
+    </div>
+
+    <div *ngIf='trips.length > 0'>
+      <div>
+        <h4>Where have you been</h4>
+      </div>
+
+      <div>
+        <div class="grid">
+
+          <div style="height:200px" *ngFor="let trip of trips" (click)="openTripDetails(trip)">
+            <img style="height:50%; width:100%; object-fit:cover; border-radius: 5px;" [src]="trip.listing.imgUrl[0]">
+            <div class="details">
+              <p style="font-size: 0.9rem">{{formatDate(trip.dateFrom)}}</p>
+              <p style="margin-top: -10px;">{{trip.listing.name}}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <h4>
+          List of Payment Types
+        </h4>
+      </div>
+
+      <div>
+        <ion-list>
+          <ion-item>
+            <h5>Visa</h5>
+          </ion-item>
+          <ion-item>
+            <h5>Master Card</h5>
+          </ion-item>
+          <ion-item>
+            <h5>American Express</h5>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

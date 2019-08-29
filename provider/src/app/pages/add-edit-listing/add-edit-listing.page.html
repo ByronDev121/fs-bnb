@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar class="toolbar-container">
+    <div class="flex-toolbar">
+      <div class="back-arrow" (click)="navBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </div>
+      <ion-title>Create new listing</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div style="margin: 0px 20px 0px 20px; color: #484848 !important;">
+    <h4
+      style="font-weight:bold;font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif !important;">
+      Listing details:
+    </h4>
+    <h5 style="font-size: 0.8rem;">
+      Show off your BnB property's space, privacy, and expert design by adding images below
+    </h5>
+  </div>
+
+  <div class="container">
+    <div>
+      <form #form="ngForm">
+        <ion-grid>
+
+          <ion-row>
+            <input style="display: none" #fileInput type="file" name="img" (change)="onFileChange($event)" />
+            <div class="image-container">
+
+              <div *ngFor="let image of listing.imgUrl" class="image" (click)="expandedImage = image.image">
+                <img class="img-upload" [src]="image">
+                <div class="image-close-button text-danger" (click)="clearImage(image)">
+                  <ion-icon name="close"></ion-icon>
+                </div>
+              </div>
+
+              <div class="image add-image" title="Add Image" (click)="fileInput.click()">
+                <ion-icon name="add"></ion-icon>
+              </div>
+
+            </div>
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Title</strong></label>
+            <input required type="text" class="form-control" [(ngModel)]="listing.name" name=" ">
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Short description</strong></label>
+            <textarea required type="text" class="form-control" [(ngModel)]="listing.shortDescription"
+              name="short-description"></textarea>
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Long
+                description</strong></label>
+            <textarea required type="email" style="height:100px!important;" class="form-control"
+              [(ngModel)]="listing.longDescription" name="long-desciption"></textarea>
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Number of guests</strong></label>
+            <div class="flex">
+              <ion-button class="btn plus-minus" (click)="minus('guests')">-</ion-button>
+              <input disabled class="form-control qty" type="number" [(ngModel)]="listing.guests" name="guests">
+              <ion-button class="btn plus-minus" (click)="plus('guests')">+</ion-button>
+            </div>
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Number of bedrooms</strong></label>
+            <div class="flex">
+              <ion-button class="btn plus-minus" (click)="minus('beds')">-</ion-button>
+              <input disabled class="form-control qty" type="number" [(ngModel)]="listing.beds" name="beds">
+              <ion-button class="btn plus-minus" (click)="plus('beds')">+</ion-button>
+            </div>
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Number of bathrooms</strong></label>
+            <div class="flex">
+              <ion-button class="btn plus-minus" (click)="minus('baths')">-</ion-button>
+              <input disabled class="form-control qty" type="number" [(ngModel)]="listing.baths" name="baths">
+              <ion-button class="btn plus-minus" (click)="plus('baths')">+</ion-button>
+            </div>
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Amenities</strong></label>
+            <input required type="text" class="form-control" [(ngModel)]="listing.amenities"
+              (click)="presentAlertCheckbox()" name="amenities">
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Price/night</strong></label>
+            <input required type="text" class="form-control" [(ngModel)]="listing.price" name="price">
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Location</strong></label>
+            <input required type="text" class="form-control" [(ngModel)]="listing.location" name="locatiom">
+          </ion-row>
+
+          <ion-row *ngIf="type=='add'">
+            <ion-button class="btn" style="width: 100%" (click)="save()" [disabled]="form.invalid">Add
+            </ion-button>
+          </ion-row>
+
+          <ion-row *ngIf="type=='edit'">
+            <ion-button class="btn" style="width: 100%" (click)="edit()" [disabled]="form.invalid">Edit
+            </ion-button>
+          </ion-row>
+
+        </ion-grid>
+      </form>
+    </div>
+  </div>
+</ion-content>

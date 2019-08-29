@@ -1,0 +1,38 @@
+<ion-tabs>
+
+<!--   <ion-header [@flyInOutTop]="tabs">
+    <ion-toolbar>
+      <ion-title>
+        <img src="assets/fs-bnb-logo.png">
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+ -->
+  <ion-tab-bar class="out" [@flyInOutBottom]="tabs" slot="bottom">
+    <ion-tab-button tab="explorer">
+      <ion-icon name="globe"></ion-icon>
+      <ion-label>Explore</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="trips">
+      <ion-icon name="paper-plane"></ion-icon>
+      <ion-label>Trips</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="inbox">
+      <ion-icon name="mail"></ion-icon>
+      <ion-label>Inbox</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-avatar style="width: 38px;height:38px;">
+        <img [src]="loggedInUser.imgUrl">
+      </ion-avatar>
+      <ion-icon style="display:none">
+      </ion-icon>
+      <ion-label>Profile</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-tabs>

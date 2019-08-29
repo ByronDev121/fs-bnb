@@ -1,0 +1,59 @@
+<ion-header class="header">
+  <ion-toolbar>
+    <ion-title class="img-container">
+      <img class="header-img" src="assets/fs-bnb-logo.png">
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="title">
+      Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-position">
+
+  <div>
+    <ion-item>
+
+
+      <ion-grid style="padding: 10px 20px 10px 20px">
+        <ion-row>
+          <ion-col col="8">
+            <h2>Hi {{user.firstName}}</h2>
+          </ion-col>
+          <ion-col col="4">
+            <div (click)="presentModal()">
+              <ion-avatar>
+                <img class="avatar" [src]="user.imgUrl">
+              </ion-avatar>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <h4>User details</h4>
+            <p>Email:{{user.email}}</p>
+            <p>Cell:{{user.cellPhone}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item>
+      <div style="padding: 10px 20px 10px 20px">
+        <h4>Random Info</h4>
+        <p>This could be a great place to show cool information about your user</p>
+        <p>Maybe a bio or something that they can edit</p>
+      </div>
+    </ion-item>
+
+
+    <div style="width:100%;margin: 50px 0px;text-align: center">
+      <ion-button (click)="presentAlert()" class="logout-btn">LOG OUT</ion-button>
+    </div>
+
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,117 @@
+.back-arrow {
+  width: 50px;
+  height: 100%;
+  font-size: 1.6rem;
+  padding: 14px;
+}
+
+.header-img {
+  height: 53px;
+  width: auto;
+  object-fit: contain;
+  position: fixed;
+  margin-left: calc(50% - 72.5px);
+}
+
+.image-container {
+  margin: 10px auto;
+  display: grid;
+  grid-template-columns: 52% 52%;
+  grid-row-gap: 5px;
+}
+
+.image {
+  position: relative;
+  width: 35vw;
+  height: 35vw;
+  border: 1px solid;
+}
+
+.add-image {
+  font-size: 2rem;
+  line-height: 35vw;
+  border-style: dashed;
+  border-width: 2px;
+  text-align: center;
+}
+
+.image-close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 30px;
+  text-align: center;
+  line-height: 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.img-upload {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin: auto;
+}
+
+form {
+  width: 95%;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-control {
+  position: relative;
+  height: auto;
+  margin: 8px 0px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 5px;
+  height: 55px;
+  border-color: rgb(0, 132, 137);
+  border-width: 0.6px;
+  background: rgba(0, 132, 137, 0.05);
+}
+
+.form-control:focus {
+  outline: none !important;
+  border: 0.6px solid rgb(0, 132, 137);
+  box-shadow: 0 0 4px rgb(0, 132, 137);
+}
+
+.btn {
+  width: 98%;
+  height: 50px;
+  color: white;
+  --background: rgb(0, 132, 137);
+  border-radius: 7px;
+  font-size: 0.8rem;
+  margin: 10px 0px;
+  font-weight: bold;
+  --background-activated: white;
+  --color-activated: rgb(0, 132, 137);
+}
+
+.plus-minus {
+  width: 50px !important;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.qty {
+  width: auto !important;
+  margin: 8px 5px;
+}
+
+.check-box-container {
+  width: 100%;
+  display: flex;
+}
+
+.nav-link {
+  color: rgb(0, 132, 137);
+}

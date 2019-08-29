@@ -1,0 +1,61 @@
+.back-arrow{
+  width: 50px;
+  height: 100%;
+  font-size: 1.6rem;
+  padding: 14px
+}
+
+.header{
+  height: 100%;
+  padding-top: 20px;
+  position: fixed;
+  margin-left: calc(50% - 72.5px);
+}
+
+.form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  border: none;
+}
+
+.slides{
+  height: 35vh;;
+}
+
+.swiper-pagination-bullet-active {
+  background: white;
+}
+
+img{
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.location{
+  margin: 3px auto;
+  color: rgb(0, 132, 137) !important;
+}
+
+.title{
+  margin: 3px auto;
+}
+
+.price{
+  margin: 3px auto;
+  font-size: 0.9rem;
+}
+
+.date-item{
+  height: 65px;
+  padding:20px 10px;
+}
+
+.date-icon{
+  font-size: 2rem;
+}

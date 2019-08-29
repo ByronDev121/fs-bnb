@@ -1,0 +1,27 @@
+{
+    "test": {
+        "driver": "mysql",
+        "host": "localhost",
+        "port": "3306",
+        "user": "root",
+        "password": "root",
+        "database":"fs_bnb"
+    },
+    "dev": {
+        "driver": "mysql",
+        "host": "eu-cdbr-west-02.cleardb.net",
+        "port": "3306",
+        "user": "b5dda02f0010b4",
+        "password": "c0e3b1d0",
+        "database":"heroku_b1ad8bc9e154404"
+    },
+    "prod-2": {
+        "driver": "mysql",
+        "host": "eu-cdbr-west-02.cleardb.net",
+        "port": "3306",
+        "user": "b1d309c302278f",
+        "password": "70b0cf7c",
+        "database":"heroku_4248410bd651df8"
+    }
+ }
+ 

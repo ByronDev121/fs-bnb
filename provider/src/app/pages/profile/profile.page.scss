@@ -1,0 +1,26 @@
+.avatar {
+  position: absolute;
+  right: 23px;
+  margin: auto;
+  height: 100px;
+  width: 100px;
+}
+
+p {
+  margin-top: -5px;
+  color: #484848 !important;
+  font-size: 0.9rem;
+}
+
+.logout-btn {
+  margin: auto;
+  width: 90%;
+  height: 50px;
+  color: white;
+  --background: rgb(0, 132, 137);
+  border-radius: 7px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  --background-activated: white;
+  --color-activated: rgb(0, 132, 137);
+}

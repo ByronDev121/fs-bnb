@@ -1,0 +1,59 @@
+<ion-header class="header">
+  <ion-toolbar class="toolbar-top">
+    <ion-buttons slot="start" [@flyInOutTop]="menuShow">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div style="margin-top:-56px;">
+    <div [class]="headerTitle" [@flyInOutTop]="imgShow">
+      <ion-title>
+        <img [class]="headerImg" src="assets/fs-bnb-logo-pink.png">
+      </ion-title>
+    </div>
+    <div [class]="search" [@flyInOutTop]="SearchShow">
+      <ion-searchbar (ionChange)="onSearch($event)"></ion-searchbar>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="openCloseTabs($event)">
+  <img class="content-position" src="assets/bg.jpg">
+  <div class="slogan">
+    <h3>Every home is a destination</h3>
+  </div>
+  <div style="position: relative;top: -35px;">
+    <div style="margin: 0px 20px 20px 20px; color: #484848 !important;">
+      <h4
+        style="font-weight:bold;font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif !important;">
+        Featured FsBnb homes</h4>
+      <h5 style="font-size: 0.8rem;margin-top:-5px;">
+        Properties chosen for space, privacy, and expert design
+      </h5>
+    </div>
+    <div class="listing-constainer" *ngFor="let listing of displayListings" (click)='navToListingDetails(listing)'>
+      <ion-slides class="slides" pager="true">
+        <ion-slide *ngFor="let img of listing.imgUrl">
+          <img src="{{img}}" />
+        </ion-slide>
+      </ion-slides>
+      <div>
+        <div class="details">
+          <p class="location">{{listing.location}}</p>
+          <h4 class="title">{{listing.name}}</h4>
+          <p class="price">R{{listing.price}}/night</p>
+        </div>
+        <div class="rate_div">
+          <rating [rate]="rate" readonly=true size="default">
+          </rating>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-fab style="margin:20px;" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="navToAddListings()" color="light">
+      <ion-icon style="color:white" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar class="toolbar-container">
+    <div class="flex-toolbar">
+      <div class="back-arrow" (click)="navBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </div>
+      <img class="header-img" src="assets/fs-bnb-logo.png">
+    </div>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="title">
+      Register
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="container">
+    <div>
+      <form (submit)="register()" #form="ngForm">
+        <ion-grid>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>First name</strong></label>
+            <input required type="text" class="form-control" required autofocus [(ngModel)]="user.firstName"
+              name="name">
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Last name</strong></label>
+            <input required type="text" class="form-control" required autofocus [(ngModel)]="user.lastName"
+              name="last-name">
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Cell Phone</strong></label>
+            <input required type="text" class="form-control" required autofocus [(ngModel)]="user.cellPhone"
+              name="cell-phone">
+          </ion-row>
+
+          <ion-row>
+            <label style="color:#484848; margin: 5px 0px;"><strong>Email</strong></label>
+            <input required type="email" class="form-control" required autofocus [(ngModel)]="user.email" name="email">
+          </ion-row>
+
+          <ion-row style="margin: 10px 0px;">
+            <label style="color:#484848; margin: 5px 0px;"><strong>Password</strong></label>
+            <input required [type]="passwordType" class="form-control" required [(ngModel)]="user.password"
+              name="password">
+          </ion-row>
+
+          <ion-row style="margin: 20px 0px;">
+            <div class="check-box-container">
+              <label>
+                <input type="checkbox" value="remember-me" [(ngModel)]="rememberUser" name="rememberMe">
+                Remember me
+              </label>
+              <div (click)="showPassword()" class="nav-link" style="position: absolute;right:calc(2.5vw + 18px)">
+                Show password
+              </div>
+            </div>
+          </ion-row>
+
+          <ion-row>
+            <ion-button class="login-btn" style="width: 100%" type="submit" [disabled]="form.invalid">REGISTER
+            </ion-button>
+          </ion-row>
+
+
+          <div style="width:100%;text-align: center;">&copy; 2019 FS-BnB. All Rights Reserved</div>
+
+        </ion-grid>
+      </form>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,105 @@
+.header {
+  position: absolute;
+  top: 0px;
+  color: alpha($color: #000000);
+}
+
+.header-md:after {
+  background-image: none;
+}
+
+.toolbar-top {
+  --background: transparent;
+}
+
+.header-title-top {
+  background-color: alpha($color: #000000);
+  text-align: center;
+  width: 100vw;
+  height: 100%;
+}
+
+.header-title {
+  background-color: rgba(29, 42, 56, 0.5);
+  text-align: center;
+  width: 100vw;
+  height: 100%;
+}
+
+.header-img-top {
+  max-height: 90px !important;
+  width: auto;
+  object-fit: contain;
+  transition: max-height 200ms;
+}
+
+.header-img {
+  max-height: 45px !important;
+  width: auto;
+  object-fit: contain;
+  transition: max-height 200ms;
+}
+
+.search-top {
+  background-color: alpha($color: #000000);
+  border: none;
+}
+
+.search {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  text-shadow: 2px 2px;
+  border-bottom: solid rgba(29, 42, 56, 0.3) 0.5px;
+}
+
+.content-position {
+  margin-top: -270px;
+  height: 650px;
+}
+
+.slogan {
+  position: relative;
+  top: -190px;
+  left: 20px;
+  color: white;
+}
+
+.listing-constainer {
+  width: 90vw;
+  margin: 10px auto 25px auto;
+}
+
+.slides {
+  height: 25vh;
+}
+
+.swiper-pagination-bullet-active {
+  background: white;
+}
+
+img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.details {
+  padding-left: 10px;
+  color: #484848 !important;
+}
+
+.location {
+  margin: 3px auto;
+  color: rgb(0, 132, 137) !important;
+}
+
+.title {
+  margin: 3px auto;
+}
+
+.price {
+  margin: 3px auto;
+  font-size: 0.9rem;
+}

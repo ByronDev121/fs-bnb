@@ -1,0 +1,84 @@
+<ion-content style="height:100vh">
+  <img src="assets/bg.jpg" class="bg-img">
+  <div class="bg">
+
+    <div style="display: flex; justify-content: center; margin-top:25px;">
+      <div class="fly-in-img" [@flyInOutLeft]="fsAnime ? 'in' : 'out'">
+        <img src="assets/fs-logo-pink.png">
+      </div>
+      <div class="fly-in-img" [@flyInOutRight]="bnbAnime ? 'in' : 'out'">
+        <img style="width: 95%;margin: 4%;" src="assets/bnb-logo-pink.png">
+      </div>
+    </div>
+
+    <div class="container" [@flyInOutBottom]="emailPasswordAnime ? 'in' : 'out'">
+      <div>
+        <form>
+          <div class="social-btns">
+            <ion-button class="social-btn">
+              <img class="social-img" src="assets/facebook.png">
+              Log in with Facebook
+            </ion-button>
+
+
+            <ion-button class="social-btn">
+              <img class="social-img" src="assets/google.png">
+              Log in with Google
+            </ion-button>
+          </div>
+
+        </form>
+
+        <div style="font-size: 0.8rem;color:#484848;text-align: center;margin-top:10px;">
+          --------------- OR ---------------
+        </div>
+
+        <form (submit)="login()" #form="ngForm">
+          <ion-grid>
+            <ion-row>
+              <label style="color:#484848; margin: 5px 0px;"><strong>Email</strong></label>
+              <input required type="email" class="form-control" required autofocus [(ngModel)]="email" name="useremail">
+            </ion-row>
+
+            <ion-row style="margin: 10px 0px;">
+              <label style="color:#484848; margin: 5px 0px;"><strong>Password</strong></label>
+              <input required [type]="passwordType" class="form-control" required [(ngModel)]="password"
+                name="userpassword">
+            </ion-row>
+
+            <ion-row style="margin: 20px 0px;">
+              <div class="check-box-container">
+                <label>
+                  <input type="checkbox" value="remember-me" [(ngModel)]="rememberUser" name="checkbox">
+                  Remember me
+                </label>
+                <div (click)="showPassword()" class="nav-link" style="position: absolute;right:calc(2.5vw + 18px)">
+                  Show password
+                </div>
+              </div>
+            </ion-row>
+
+            <ion-row>
+              <ion-button [class]="loginBtn" style="width: 100%" type="submit" [disabled]="form.invalid">LOGIN
+              </ion-button>
+            </ion-row>
+
+            <ion-row style="text-align: center;">
+              <div style="margin: 10px auto;">
+                <div style="display:flex">
+                  Don't have an account?
+                  <div class="nav-link" (click)="signUp()">Sign up</div>
+                </div>
+              </div>
+            </ion-row>
+            <ion-row>
+
+            </ion-row>
+            <div style="width:100%;text-align: center;">&copy; 2019 FS-BnB. All Rights Reserved</div>
+          </ion-grid>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

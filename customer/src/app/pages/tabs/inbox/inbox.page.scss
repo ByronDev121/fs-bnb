@@ -1,0 +1,36 @@
+.header{
+    position: absolute;
+}
+
+.img-container{
+    background-color: #fe5e55;
+    text-align: center;
+    position: relative;
+    top:-4px;
+    width: 100vw;
+    height: 100%;
+}
+
+.header-img{
+    height: 43px;
+    width: auto;
+    object-fit: contain;
+}
+
+.title{
+    background-color: white;
+}
+
+.content-position{
+    margin-top: 100px; 
+    height: 280px;
+}
+
+.chat-row{
+    height: 95px;
+}
+
+.avatar {
+    height: 70px;
+    width: 70px;
+}

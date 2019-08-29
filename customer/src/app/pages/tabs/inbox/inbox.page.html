@@ -1,0 +1,40 @@
+<ion-header class="header" [@flyInOutTop]="tabsShow">
+  <ion-toolbar>
+    <ion-title class="img-container">
+      <img class="header-img" src="assets/fs-bnb-logo.png">
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="title">
+      Inbox
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="openCloseTabs($event)" class="background-colour">
+
+  <div class="content-position">
+
+    <ion-refresher style="position:relative;" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list>
+      <ion-item detail *ngFor="let chat of chats" (click)="openChat(chat)">
+        <ion-avatar class="avatar" slot="start">
+          <img src="{{chat.providerImgUrl}}">
+        </ion-avatar>
+        <ion-label>
+          <div style="display: flex">
+            <h3><strong>{{chat.providerUserName}}</strong></h3>
+            <p>{{chat.messages[0].dateTimeCreate}}</p>
+          </div>
+          <p>{{chat.messages[0].text}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>

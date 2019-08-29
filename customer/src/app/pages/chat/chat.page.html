@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar class="toolbar-container">
+    <div class="flex-toolbar">
+      <div class="back-arrow" (click)="navBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </div>
+      <div class="header">
+        <ion-title>Chat</ion-title>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-colour">
+
+  <div class="sticky-bottom">
+    <form (submit)="sendMessage()" #form="ngForm">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="10">
+            <textarea required type="text" class="form-control" placeholder="Type Message" required autofocus
+              [(ngModel)]="newMessage" name="newMessage"></textarea>
+          </ion-col>
+          <ion-col size="2">
+            <div class="send-icon">
+              <ion-icon name="send"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>
