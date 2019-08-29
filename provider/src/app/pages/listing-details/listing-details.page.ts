@@ -44,7 +44,7 @@ export class ListingDetailsPage implements OnInit {
   }
 
   navToBooking() {
-    this.navCtrl.navigateForward('booknow', {
+    this.navCtrl.navigateForward('bookings', {
       queryParams: {
         listingID: this.listing.id,
         userID: this.user.id

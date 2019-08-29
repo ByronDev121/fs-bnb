@@ -13,7 +13,12 @@
 
   <ion-slides class="slides" pager="true">
     <ion-slide *ngFor="let img of listing.imgUrl">
-      <img src="{{img}}" />
+      <ion-spinner style="
+          z-index: -1;
+          position: absolute;
+          margin-right: auto;
+          margin-left: auto;" *ngIf="!img.loaded" name="dots"></ion-spinner>
+      <img style="z-index: 1" src="{{img}}" />
     </ion-slide>
   </ion-slides>
 
@@ -37,7 +42,11 @@
         <h3>Photos</h3>
       </div>
       <div style="height: 250px;padding:5px" *ngFor="let img of listing.imgUrl">
-        <img src="{{img}}" />
+        <ion-spinner style="
+          z-index: 0;
+          position: absolute;
+          margin:auto" *ngIf="!img.loaded" name="dots"></ion-spinner>
+        <img style="z-index: 2" src="{{img}}" />
       </div>
       <ion-button fill="outline" class="photos-btn">
         See all photos

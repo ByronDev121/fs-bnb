@@ -48,6 +48,14 @@
   display: flex;
 }
 
+.back-arrow {
+  z-index: 1;
+  width: 50px;
+  height: 100%;
+  font-size: 1.6rem;
+  padding: 14px;
+}
+
 .rate_div {
   margin-top: -5px;
 

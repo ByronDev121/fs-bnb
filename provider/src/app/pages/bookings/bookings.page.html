@@ -10,5 +10,37 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-card *ngFor="let booking of bookings">
+      <ion-card-header>
+        <ion-card-title>User ID: {{booking.userId}}</ion-card-title>
+        <p></p>
+        <ion-card-subtitle>
+          <div class="text">
+            Booking request dates:
+          </div>
+
+          <div class="text">
+            <div>
+              From: {{booking.dateFrom}}
+            </div>
+            <div>
+              To: {{booking.dateTo}}
+            </div>
+          </div>
+
+          <div class="text">
+            Booking Status: {{booking.status}}
+          </div>
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <div class="buttons">
+        <ion-button color="light" (click)="updateBooking('accept', booking)">Accept Booking</ion-button>
+        <ion-button color="medium" (click)="updateBooking('reject', booking)">Deny Booking</ion-button>
+      </div>
+
+    </ion-card>
+  </ion-list>
 
 </ion-content>

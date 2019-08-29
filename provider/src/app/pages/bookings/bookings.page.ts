@@ -28,13 +28,13 @@ export class BookingsPage implements OnInit {
         this.bookingService.getBookingsbyListingId(this.listingId).then(res => {
           this.bookings = res;
         }).catch(err => {
-          this.presentAlert(err);
+          this.presentAlert('Error', err);
         });
       } else {
         this.bookingService.getAllBookings().then((res: any) => {
           this.bookings = res;
         }).catch(err => {
-          this.presentAlert(err);
+          this.presentAlert('Error', err);
         });
       }
     };
@@ -45,10 +45,22 @@ export class BookingsPage implements OnInit {
     this.navCtrl.pop();
   }
 
-  async presentAlert(err) {
+  updateBooking(type, booking) {
+    if (type === 'accept') {
+      booking.status = 'accepted';
+    } else {
+      booking.status = 'rejected';
+    }
+    this.bookingService.updateBooking(booking).then((res: any) => {
+      this.presentAlert('Sucess', res);
+    }).catch(err => {
+      this.presentAlert('Error', err);
+    });
+  }
+
+  async presentAlert(type, err) {
     const alert = await this.alertCtrl.create({
-      header: 'Alert',
-      subHeader: 'Failed to login',
+      header: type,
       message: err,
       buttons: ['OK']
     });

@@ -26,7 +26,12 @@
     <div class="listing-constainer" *ngFor="let listing of displayListings" (click)='navToListingDetails(listing)'>
       <ion-slides class="slides" pager="true">
         <ion-slide *ngFor="let img of listing.imgUrl">
-          <img src="{{img}}" />
+          <ion-spinner style="
+            z-index: 0;
+            position: absolute;
+            margin-right: auto;
+            margin-left: auto;" *ngIf="!img.loaded" name="dots"></ion-spinner>
+          <img style="z-index: 1" src="{{img}}" />
         </ion-slide>
       </ion-slides>
       <div>
