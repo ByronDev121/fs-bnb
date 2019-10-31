@@ -1,17 +1,18 @@
 export class Chat {
     public id: number;
     public userId: number;
+    public userName: string;
     public userImgUrl: string;
-    public providerUserId: number;
-    public providerUserName: string;
+    public providerId: number;
+    public providerName: string;
     public providerImgUrl: string;
-    public latestTextId: number;
-    public messages: Array<TextMessage>
+    public messages: Array<TextMessage> = [];
 }
 
 export class TextMessage {
     public id: number;
     public chatId: number;
+    public senderId: number;
     public text: string;
     public dateTimeCreate: Date;
 }

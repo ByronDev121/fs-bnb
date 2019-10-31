@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-dash-board',
   templateUrl: './dash-board.component.html',
@@ -12,15 +11,15 @@ export class DashBoardComponent implements OnInit {
   navItems: Array<any> = [
     {
       name: 'Home',
-      rout: '/home'
+      route: '/home'
     },
     {
       name: 'Users',
-      rout: '/users'
+      route: '/users'
     },
     {
-      name: 'Service Providers',
-      rout: '/service-providers'
+      name: 'Providers',
+      route: '/service-providers'
     }
   ];
 
@@ -33,7 +32,7 @@ export class DashBoardComponent implements OnInit {
   }
 
   navTo(page) {
-    this.router.navigate([page.rout]);
+    this.router.navigate([page.route]);
   }
 
 }

@@ -9,11 +9,9 @@ const routes: Routes = [
   { path: 'bookings', loadChildren: './pages/bookings/bookings.module#BookingsPageModule' },
   { path: 'inbox', loadChildren: './pages/inbox/inbox.module#InboxPageModule' },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
-  { path: 'booking-details', loadChildren: './pages/booking-details/booking-details.module#BookingDetailsPageModule' },
   { path: 'listing-details', loadChildren: './pages/listing-details/listing-details.module#ListingDetailsPageModule' },
   { path: 'add-edit-listing', loadChildren: './pages/add-edit-listing/add-edit-listing.module#AddEditListingPageModule' },
-
-
+  { path: 'chat', loadChildren: './pages/chat/chat.module#ChatPageModule' },
 ];
 
 @NgModule({

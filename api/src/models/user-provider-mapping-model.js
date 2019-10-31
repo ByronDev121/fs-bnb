@@ -61,8 +61,7 @@ UserProviderMapping.getById = function(id, result) {
   db.createConnection()
     .then(mysqlConn => {
       mysqlConn.query(
-        "Select * from user_provider-mapping where id = ? ",
-        id,
+        "Select * from user_provider-mapping where id = " + id,
         function(err, res) {
           if (err) {
             console.log("error: ", err);
@@ -105,8 +104,7 @@ UserProviderMapping.remove = function(id, result) {
   db.createConnection()
     .then(mysqlConn => {
       mysqlConn.query(
-        "DELETE FROM user_provider-mapping WHERE id = ?",
-        id,
+        "DELETE FROM user_provider-mapping WHERE id =" + id,
         function(err, res) {
           if (err) {
             console.log("error: ", err);

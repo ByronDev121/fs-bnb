@@ -11,8 +11,10 @@ import { Booking } from 'src/app/models';
 })
 export class BookingsPage implements OnInit {
 
+  public listingName: string;
   public listingId: string;
   public bookings: Array<Booking> = [];
+  public loading: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,19 +24,29 @@ export class BookingsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
+  }
+
+  ionViewWillEnter() {
+    this.loading = true;
     const navParamCallBack = (data: any) => {
+      this.listingName = data.params.listingName;
       this.listingId = data.params.listingId;
       if (this.listingId) {
         this.bookingService.getBookingsbyListingId(this.listingId).then(res => {
           this.bookings = res;
+          this.loading = false;
         }).catch(err => {
           this.presentAlert('Error', err);
+          this.loading = false;
         });
       } else {
         this.bookingService.getAllBookings().then((res: any) => {
           this.bookings = res;
+          this.loading = false;
         }).catch(err => {
           this.presentAlert('Error', err);
+          this.loading = false;
         });
       }
     };
@@ -45,23 +57,20 @@ export class BookingsPage implements OnInit {
     this.navCtrl.pop();
   }
 
-  updateBooking(type, booking) {
-    if (type === 'accept') {
-      booking.status = 'accepted';
-    } else {
-      booking.status = 'rejected';
-    }
+  updateBooking(status, booking) {
+    booking.status = status;
     this.bookingService.updateBooking(booking).then((res: any) => {
+      this.ngOnInit();
       this.presentAlert('Sucess', res);
     }).catch(err => {
       this.presentAlert('Error', err);
     });
   }
 
-  async presentAlert(type, err) {
+  async presentAlert(type, msg) {
     const alert = await this.alertCtrl.create({
       header: type,
-      message: err,
+      message: msg,
       buttons: ['OK']
     });
 

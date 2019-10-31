@@ -18,6 +18,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+// Modal Page Module:
+import { UploadPageModule } from './modals/upload/upload.module';
+
 // Dependacies:
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -34,6 +37,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     HttpClientModule,
     MatButtonModule,
     MatCheckboxModule,
+    UploadPageModule
   ],
   providers: [
     StatusBar,

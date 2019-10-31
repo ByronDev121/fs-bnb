@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, Listing } from '../../models';
+import { Listing } from '../../models';
 import { ListingService } from '../../services/listing.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
@@ -13,7 +13,9 @@ export class ListingDetailsPage implements OnInit {
 
   public listing: Listing = new Listing();
   public amenities: Array<string> = [];
-  public user: User = new User();
+  public showAmenities: boolean = false;
+  public showPhotos: boolean = false;
+  public loading: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,9 +24,9 @@ export class ListingDetailsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     const navParamCallBack = (data: any) => {
       this.listing.id = data.params.listingId;
-      this.user.id = data.params.userId;
     };
     this.activatedRoute.queryParamMap.subscribe(navParamCallBack);
 
@@ -35,6 +37,7 @@ export class ListingDetailsPage implements OnInit {
       }
       this.listing = listing;
       this.amenities = JSON.parse(listing.amenities);
+      this.loading = false;
     };
     this.listingService.getListingbyId(this.listing.id, listingsCallBack);
   }
@@ -46,8 +49,8 @@ export class ListingDetailsPage implements OnInit {
   navToBooking() {
     this.navCtrl.navigateForward('bookings', {
       queryParams: {
-        listingID: this.listing.id,
-        userID: this.user.id
+        listingName: this.listing.name,
+        listingId: this.listing.id
       }
     });
   }

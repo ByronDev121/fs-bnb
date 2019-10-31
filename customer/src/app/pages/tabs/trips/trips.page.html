@@ -13,7 +13,9 @@
 
 <ion-content [scrollEvents]="true" (ionScroll)="openCloseTabs($event)" class="background-colour">
 
-  <div class="content-position">
+  <ion-spinner *ngIf="loading" class="loading" name="dots"></ion-spinner>
+
+  <div *ngIf="!loading" class="content-position">
     <div>
       <div>
         <h4>
@@ -21,22 +23,57 @@
         </h4>
       </div>
 
-      <div>
+      <div *ngIf='upcomingTrips.length == 0'>
         <img src="assets/no-trips.jpg">
-        Note that you have no upcoming trips. <br>
-        <ion-button class="btn" (click)="navToExplore()">Explore AirBnB</ion-button>
+        Note that you have no upcoming trips.
+        <br>
+        <ion-button fill="outline" class="btn" (click)="navToExplore()">Explore AirBnB</ion-button>
+      </div>
+
+      <div *ngIf='upcomingTrips.length > 0'>
+        <div class="grid">
+
+          <div style="height:200px" *ngFor="let trip of upcomingTrips" (click)="openTripDetails(trip)">
+            <img style="height:50%; width:100%; object-fit:cover; border-radius: 5px;" [src]="trip.listing.imgUrl[0]">
+            <div class="details">
+              <p style="font-size: 0.9rem">{{formatDate(trip.dateFrom)}}</p>
+              <p style="margin-top: -10px;">{{trip.listing.name}}</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
-    <div *ngIf='trips.length > 0'>
+    <div *ngIf='pendingTrips.length > 0'>
       <div>
-        <h4>Where have you been</h4>
+        <h4>Pending Travel</h4>
       </div>
 
       <div>
         <div class="grid">
 
-          <div style="height:200px" *ngFor="let trip of trips" (click)="openTripDetails(trip)">
+          <div style="height:200px" *ngFor="let trip of pendingTrips" (click)="openTripDetails(trip)">
+            <img style="height:50%; width:100%; object-fit:cover; border-radius: 5px;" [src]="trip.listing.imgUrl[0]">
+            <div class="details">
+              <p style="font-size: 0.9rem">{{formatDate(trip.dateFrom)}}</p>
+              <p style="margin-top: -10px;">{{trip.listing.name}}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf='pastTrips.length > 0'>
+      <div>
+        <h4>Where you've been</h4>
+      </div>
+
+      <div>
+        <div class="grid">
+
+          <div style="height:200px" *ngFor="let trip of pastTrips" (click)="openTripDetails(trip)">
             <img style="height:50%; width:100%; object-fit:cover; border-radius: 5px;" [src]="trip.listing.imgUrl[0]">
             <div class="details">
               <p style="font-size: 0.9rem">{{formatDate(trip.dateFrom)}}</p>
@@ -51,7 +88,7 @@
     <div>
       <div>
         <h4>
-          List of Payment Types
+          List of Payment Methods
         </h4>
       </div>
 

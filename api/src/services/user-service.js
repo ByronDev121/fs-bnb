@@ -9,8 +9,9 @@ module.exports = class UserService {
       User.getAll((err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -20,8 +21,9 @@ module.exports = class UserService {
       User.getById(id, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res[0]);
         }
-        resolve(res[0]);
       });
     });
   }
@@ -31,8 +33,9 @@ module.exports = class UserService {
       User.create(user, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -42,8 +45,9 @@ module.exports = class UserService {
       User.updateById(user.id, user, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -53,8 +57,9 @@ module.exports = class UserService {
       User.updateImageById(userId, url, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -64,8 +69,9 @@ module.exports = class UserService {
       User.remove(id, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }

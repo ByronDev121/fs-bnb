@@ -1,36 +1,31 @@
 import { Injectable } from '@angular/core';
-import { ServiceProvider } from '../../models/service-provider';
+import { User } from '../../models/user/user';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceProviderService {
 
-  serviceProviders: Array<ServiceProvider>;
+  public serviceProviders: Array<User>;
 
-  constructor() {
+  constructor(
+    private http: HttpClient
+  ) { }
 
-    this.serviceProviders = [
-      {
-        name: 'Joe',
-        lastName: 'Soap',
-        email: 'joe@mail.com',
-        cellPhone: 828073593,
-        numberOfListings: 5
-      },
-      {
-        name: 'John',
-        lastName: 'Doe',
-        email: 'john@mail.com',
-        cellPhone: 828073545,
-        numberOfListings: 15
-      }
-    ];
-
-  }
-
-  getServiceProviders(): Array<ServiceProvider> {
-    return this.serviceProviders;
+  getAll(): Promise<Array<User>> {
+    return new Promise((resolve, reject) => {
+      let httpHeaders = new HttpHeaders();
+      httpHeaders = httpHeaders.set('Content-Type', 'application/json');
+      httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
+      this.http.get(environment.baseUrl + '/api/user', { headers: httpHeaders }).subscribe((res: Array<User>) => {
+        res = res.filter(x => x.role === 'provider');
+        resolve(res);
+      }, err => {
+        reject(err);
+      });
+    });
   }
 
 }

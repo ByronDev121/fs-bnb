@@ -1,0 +1,9 @@
+.table-row {
+  cursor: pointer;
+  line-height: 50px;
+}
+
+.table-row:hover {
+  background-color: rgba(0, 123, 255, 0.5);
+
+}

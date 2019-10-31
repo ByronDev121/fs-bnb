@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // Heroku
-  BaseURL: 'https://fs-bnb-app.herokuapp.com'
+  // BaseURL: 'https://fs-bnb-app.herokuapp.com'
 
   // Huawei router
   // BaseURL: 'http://192.168.8.101:3000'
@@ -17,7 +17,7 @@ export const environment = {
   // BaseURL: 'http://10.5.50.238:3000'
 
   // local host
-  // BaseURL: 'http://localhost:3000'
+  BaseURL: 'http://localhost:3000'
 };
 
 /*

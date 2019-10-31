@@ -1,0 +1,14 @@
+.table-row {
+  cursor: pointer;
+}
+
+.table-row:hover {
+  background-color: rgba(0, 123, 255, 0.5);
+
+}
+
+.avatar {
+  object-fit: contain;
+  height: 50px;
+  border-radius: 50%;
+}

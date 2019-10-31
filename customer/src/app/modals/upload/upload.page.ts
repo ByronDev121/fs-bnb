@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UploadService } from '../../services/upload.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { User } from '../../models/user.model';
 
@@ -12,19 +11,15 @@ import { User } from '../../models/user.model';
 export class UploadPage implements OnInit {
 
   @Input() user: User;
-  ngForm: FormGroup;
-
-  fileAdded: Boolean = false;
+  @Input() that;
   image: any;
+  uploadImage: any;
 
   constructor(
     private uploadService: UploadService,
-    private formBuilder: FormBuilder,
     private modalCtrl: ModalController
   ) {
-    this.ngForm = this.formBuilder.group({
-      avatar: ['']
-    });
+
   }
 
   ngOnInit() {
@@ -33,15 +28,14 @@ export class UploadPage implements OnInit {
   onFileChange(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.ngForm.get('avatar').setValue(file);
       this.createImageFromBlob(file);
+      this.uploadImage = file;
     }
-    this.fileAdded = true;
   }
 
   createImageFromBlob(image) {
     let reader = new FileReader();
-    reader.addEventListener("load", () => {
+    reader.addEventListener('load', () => {
       this.image = reader.result;
     }, false);
     if (image) {
@@ -51,7 +45,7 @@ export class UploadPage implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-    formData.append('file', this.ngForm.get('avatar').value);
+    formData.append('file', this.uploadImage);
 
     const userId = localStorage.getItem('userId');
     this.uploadService.uploadImage(userId, formData, (err, res) => {
@@ -64,11 +58,8 @@ export class UploadPage implements OnInit {
     });
   }
 
-  clearImage() {
-
-  }
-
   async onDismiss() {
+    this.that.ngOnInit();
     await this.modalCtrl.dismiss();
   }
 

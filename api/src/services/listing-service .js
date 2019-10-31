@@ -22,8 +22,9 @@ module.exports = class ListingService {
       Listing.getById(id, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res[0]);
         }
-        resolve(res[0]);
       });
     });
   }
@@ -33,8 +34,9 @@ module.exports = class ListingService {
       Listing.getByProviderId(id, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res[0]);
       });
     });
   }
@@ -45,8 +47,9 @@ module.exports = class ListingService {
       Listing.create(newListing, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -56,8 +59,9 @@ module.exports = class ListingService {
       Listing.updateById(listing.id, listing, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -71,8 +75,9 @@ module.exports = class ListingService {
       ListingImgMapping.create(imgMapping, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -82,8 +87,9 @@ module.exports = class ListingService {
       Listing.remove(id, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }

@@ -1,9 +1,16 @@
-<ion-header>
+<ion-header class="header">
+  <ion-toolbar class="toolbar-container">
+    <div class="flex-toolbar">
+      <ion-buttons class="back-arrow" slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <img class="header-img" src="assets/fs-bnb-logo.png">
+      </ion-title>
+    </div>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
+    <ion-title class="title">
       Inbox
     </ion-title>
   </ion-toolbar>
@@ -11,7 +18,13 @@
 
 <ion-content [scrollEvents]="true" class="background-colour">
 
-  <div>
+  <ion-spinner *ngIf="loading" class="loading" name="dots"></ion-spinner>
+
+  <div style="margin-top:40%; text-align: center" *ngIf="!chats.length&&!loading">
+    <h2>No chats yet..</h2>
+  </div>
+
+  <div *ngIf="!loading" class="content-position">
 
     <ion-refresher style="position:relative;" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
@@ -22,17 +35,17 @@
     <ion-list>
       <ion-item detail *ngFor="let chat of chats" (click)="openChat(chat)">
         <ion-avatar class="avatar" slot="start">
-          <img src="{{chat.providerImgUrl}}">
+          <img src="{{chat.userImgUrl}}">
         </ion-avatar>
         <ion-label>
-          <div style="display: flex">
-            <h3><strong>{{chat.providerUserName}}</strong></h3>
-            <p>{{chat.messages[0].dateTimeCreate}}</p>
-          </div>
-          <p>{{chat.messages[0].text}}</p>
+          <h3><strong>{{chat.userName}}</strong></h3>
+          <p>{{chat.messages[chat.messages.length-1].text}}</p>
+          <p style="position: absolute; right:30px;">{{chat.messages[chat.messages.length-1].dateCreated.slice(0,10)}}
+          </p>
         </ion-label>
       </ion-item>
     </ion-list>
 
   </div>
+
 </ion-content>

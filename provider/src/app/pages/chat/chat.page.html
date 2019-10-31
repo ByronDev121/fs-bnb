@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar class="toolbar-container">
+    <div class="flex-toolbar">
+      <div class="back-arrow" (click)="navBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </div>
+      <ion-avatar style="position:relative; left:13%; height: 50px; width:50px">
+        <img *ngIf="chat" [src]="chat.userImgUrl">
+      </ion-avatar>
+      <div class="header-title">
+        <ion-title>
+          {{chat.userName}}
+        </ion-title>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #scrollElement [scrollEvents]="true" class="background-colour">
+
+  <ion-spinner *ngIf="loading" class="loading" name="dots"></ion-spinner>
+
+  <div *ngIf="!loading" class="chat-messages">
+
+    <div style="margin: 10px;" *ngFor="let message of chat.messages">
+
+      <div [ngClass]="isUserText(message.senderId) ? 'speech-bubble-left' : 'speech-bubble-right' ">
+        {{message.text}}
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="sticky-bottom">
+    <form (submit)="sendMessage()" #form="ngForm">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="10">
+            <textarea required type="text" class="form-control" placeholder="Type Message" required autofocus
+              [(ngModel)]="newMessage.text" name="newMessage"></textarea>
+          </ion-col>
+          <ion-col size="2">
+            <div class="send-icon" (click)="sendMessage()">
+              <ion-icon name="send"></ion-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

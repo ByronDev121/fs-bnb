@@ -1,8 +1,25 @@
-.table-row{
-    cursor: pointer;
+.table-row {
+  cursor: pointer;
 }
 
-.table-row:hover{
-    background-color: rgba(0, 123, 255, 0.5);
+.table-row:hover {
+  background-color: rgba(0, 123, 255, 0.5);
 
+}
+
+.avatar {
+  object-fit: contain;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.chart-container {
+  width: 50%;
+  display: block;
+  text-align: center;
+  margin-left: 20%
+}
+
+.graph-title {
+  color: purple;
 }

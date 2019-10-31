@@ -4,14 +4,29 @@
       <div class="back-arrow" (click)="navBack()">
         <ion-icon name="arrow-back"></ion-icon>
       </div>
-      <div class="header">
-        <ion-title>Chat</ion-title>
+      <ion-avatar style="position:relative; left:13%; height: 50px; width:50px">
+        <img [src]="chat.providerImgUrl">
+      </ion-avatar>
+      <div class="header-title">
+        <ion-title>
+          {{chat.providerName}}
+        </ion-title>
       </div>
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="background-colour">
+<ion-content class="background-colour" #scrollElement>
+
+
+  <div class="chat-messages">
+    <div style="margin: 10px;" *ngFor="let message of chat.messages">
+      <div [ngClass]="isUserText(message.senderId) ? 'speech-bubble-left' : 'speech-bubble-right'">
+        {{message.text}}
+      </div>
+    </div>
+  </div>
+
 
   <div class="sticky-bottom">
     <form (submit)="sendMessage()" #form="ngForm">
@@ -19,10 +34,10 @@
         <ion-row>
           <ion-col size="10">
             <textarea required type="text" class="form-control" placeholder="Type Message" required autofocus
-              [(ngModel)]="newMessage" name="newMessage"></textarea>
+              [(ngModel)]="newMessage.text" name="newMessage"></textarea>
           </ion-col>
           <ion-col size="2">
-            <div class="send-icon">
+            <div class="send-icon" (click)="sendMessage()">
               <ion-icon name="send"></ion-icon>
             </div>
           </ion-col>

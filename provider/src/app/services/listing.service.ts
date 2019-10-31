@@ -12,12 +12,12 @@ export class ListingService {
   constructor(
     private http: HttpClient
   ) { }
-  getListingsByProviderId(cb) {
+  getListingsByProviderId(id, cb) {
     let httpHeaders = new HttpHeaders();
     httpHeaders = httpHeaders.set('Content-Type', 'application/json');
     httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
     this.http
-      .get(environment.BaseURL + '/api/listing', { headers: httpHeaders })
+      .get(environment.BaseURL + '/api/listing/provider/' + id, { headers: httpHeaders })
       .subscribe(
         (response: any) => {
           console.log(response);

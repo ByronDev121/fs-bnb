@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Events } from '@ionic/angular';
+import { NavController, Events, LoadingController } from '@ionic/angular';
 import { User, Chat } from '../../../models';
 import { UserService, ChatService } from 'src/app/services';
 
@@ -40,16 +40,19 @@ export class InboxPage {
   public chats: Array<Chat> = [];
   public user: User = new User();
   public tabsShow = 'in';
+  public loading: boolean;
 
   constructor(
     private navCtrl: NavController,
     private userService: UserService,
     private chatService: ChatService,
-    private events: Events
+    private events: Events,
+    private loadingCtrl: LoadingController
   ) {
   }
 
   ionViewDidEnter() {
+    this.loading = true;
     this.user.id = parseInt(localStorage.getItem('userId'));
     this.userService.getUserById(this.user.id, this.userCallBack);
     this.chatService.getByUserId(this.user.id, this.chatCallBack);
@@ -81,23 +84,21 @@ export class InboxPage {
       alert(err.message);
       return;
     } else {
-      this.chats = chats.sort(this.sortByFollowUpDate);;
+      if (chats) {
+        this.chats = chats.sort(this.sortByFollowUpDate);
+        this.loading = false;
+      }
     }
   }
 
-  getName(id) {
-    this.userService.getUserById(id, (err, user) => {
-      return user.firstName + user.lastName;
-    });
-  }
-
   doRefresh(event) {
-    console.log('Begin async operation');
     this.chatService.getByUserId(this.user.id, (err, chats) => {
       if (err) {
         alert(err.message);
       } else {
-        this.chats = chats.sort(this.sortByFollowUpDate);
+        if (chats) {
+          this.chats = chats.sort(this.sortByFollowUpDate);
+        }
         event.target.complete();
       }
     });
@@ -120,8 +121,10 @@ export class InboxPage {
   openChat(chat) {
     this.navCtrl.navigateForward('chat', {
       queryParams: {
-        chat: chat
+        userId: this.user.id,
+        chatId: chat.id
       }
     });
   }
+
 }

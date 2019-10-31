@@ -6,8 +6,9 @@ const db = DB.instance();
 var ChatHistory = function(chat) {
   this.id;
   this.chatId = chat.chatId;
+  this.senderId = chat.senderId;
   this.text = chat.text;
-  this.dateTimeCreate = new Date();
+  this.dateCreated = new Date();
 };
 
 // Object methods
@@ -33,12 +34,29 @@ ChatHistory.create = function(newChatMsg, result) {
     });
 };
 
+ChatHistory.getAll = function(result) {
+  db.createConnection()
+    .then(mysqlConn => {
+      mysqlConn.query("Select * from chat_history", function(err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else {
+          result(null, res);
+        }
+        mysqlConn.release();
+      });
+    })
+    .catch(err => {
+      result(err, null);
+    });
+};
+
 ChatHistory.getByChatId = function(chatId, result) {
   db.createConnection()
     .then(mysqlConn => {
       mysqlConn.query(
-        "Select * from chat_history where chatId = ? ",
-        chatId,
+        "Select * from chat_history where chatId = " + chatId,
         function(err, res) {
           if (err) {
             console.log("error: ", err);
@@ -59,8 +77,7 @@ ChatHistory.remove = function(ChatMsgId, result) {
   db.createConnection()
     .then(mysqlConn => {
       mysqlConn.query(
-        "DELETE FROM chat_history WHERE id = ?",
-        [ChatMsgId],
+        "DELETE FROM chat_history WHERE id = " + ChatMsgId,
         function(err, res) {
           if (err) {
             console.log("error: ", err);

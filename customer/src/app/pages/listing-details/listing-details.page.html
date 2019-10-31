@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar class="toolbar-container">
-    <div class="flex-toolbar">
-      <div class="back-arrow" (click)="navBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </div>
+
+    <div class="back-arrow" (click)="navBack()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </div>
+    <div class="header-title">
       <ion-title>{{listing.name}}</ion-title>
     </div>
   </ion-toolbar>
@@ -11,75 +12,67 @@
 
 <ion-content class="background-colour">
 
-  <ion-slides class="slides" pager="true">
-    <ion-slide *ngFor="let img of listing.imgUrl">
-      <ion-spinner style="
+  <ion-spinner *ngIf="loading" class="loading" name="dots"></ion-spinner>
+
+  <div *ngIf="!loading">
+    <ion-slides class="slides" pager="true">
+      <ion-slide *ngFor="let img of listing.imgUrl">
+        <ion-spinner style="
         z-index: 0;
         position: absolute;
         margin-right: auto;
         margin-left: auto;" *ngIf="!img.loaded" name="dots"></ion-spinner>
-      <img style="z-index: 1" src="{{img}}" />
-    </ion-slide>
-  </ion-slides>
-
-  <ion-item>
-    <div style="padding: 10px 20px 10px 20px">
-      <h2>{{listing.name}}</h2>
-      <p>{{listing.location}}</p>
-      <p>----</p>
-      <h3>{{listing.shortDescription}}</h3>
-      <p style="font-size: 0.9rem">{{listing.guests}} guests · {{listing.beds}} bedrooms · {{listing.baths}} baths</p>
-      <div style="margin: 35px auto">
-        <p>
-          {{listing.longDescription}}
-        </p>
-      </div>
-    </div>
-  </ion-item>
-  <ion-item>
-    <div>
-      <div style="padding: 10px 20px 10px 20px">
-        <h3>Photos</h3>
-      </div>
-      <div style="height: 250px;padding:5px" *ngFor="let img of listing.imgUrl">
-        <ion-spinner style="
-          z-index: 0;
-          position: absolute;
-          margin-right: auto;
-          margin-left: auto;" *ngIf="!img.loaded" name="dots"></ion-spinner>
         <img style="z-index: 1" src="{{img}}" />
-      </div>
-      <ion-button fill="outline" class="photos-btn">
-        See all photos
-      </ion-button>
-    </div>
-  </ion-item>
-  <ion-item>
-    <div style="width:100%">
+      </ion-slide>
+    </ion-slides>
+
+    <ion-item>
       <div style="padding: 10px 20px 10px 20px">
-        <h3>Amenities</h3>
-        <div>
-          <p *ngFor="let item of amenities">{{item}}</p>
-          <!-- <p>Chef's kitchen</p>
-          <p>Sound system</p>
-          <p>TV</p> -->
+        <h2>{{listing.name}}</h2>
+        <p>{{listing.location}}</p>
+        <p>----</p>
+        <h3>{{listing.shortDescription}}</h3>
+        <p style="font-size: 0.9rem">{{listing.guests}} guests · {{listing.beds}} bedrooms · {{listing.baths}} baths</p>
+        <div style="margin: 35px auto">
+          <p>
+            {{listing.longDescription}}
+          </p>
         </div>
-        <!-- <br>
-        <div>
-          <p><strong>Essentials</strong></p>
-          <p>Air conditioning</p>
-          <p>Wifi</p>
-          <p>Dryer</p>
-          <p>Espresso machine</p>
-          <p>Heating</p>
-          <p>Parking</p>
-        </div> -->
       </div>
-      <ion-button fill="outline" class="photos-btn">
-        See all amenities
-      </ion-button>
-    </div>
-  </ion-item>
+    </ion-item>
+    <ion-item>
+      <div>
+        <div style="padding: 10px 20px 10px 20px">
+          <h3>Photos</h3>
+        </div>
+        <div *ngFor="let img of listing.imgUrl let i=index">
+          <ion-spinner style="
+          z-index: 0;
+          position: absolute;" name="dots"></ion-spinner>
+          <img style="z-index: 2" src="{{img}}" *ngIf="i < 3 || showPhotos" />
+        </div>
+        <ion-button fill="outline" class="photos-btn" (click)="showPhotos = !showPhotos">
+          <div *ngIf="!showPhotos">See all photos</div>
+          <div *ngIf="showPhotos">See less photos</div>
+        </ion-button>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div style="width:100%">
+        <div style="padding: 10px 20px 10px 20px">
+          <h3>Amenities</h3>
+          <div [ngClass]="{ 'open': showAmenities, 'amenities': !showAmenities  }">
+            <p *ngFor="let item of amenities">{{item}}</p>
+          </div>
+        </div>
+
+        <ion-button fill="outline" class="photos-btn" (click)="showAmenities = !showAmenities">
+          <div *ngIf="!showAmenities">See all amenities</div>
+          <div *ngIf="showAmenities">See less amenities</div>
+        </ion-button>
+      </div>
+    </ion-item>
+  </div>
 
 </ion-content>
 
@@ -91,11 +84,13 @@
           <strong>
             R {{listing.price}}
           </strong> / night
+
         </div>
       </ion-col>
-      <ion-col col-4 style="padding-left: 80px;padding-right: 30px;">
-        <ion-button style="width: 100%" size="medium" (click)="navToBooking()"><strong>Book</strong></ion-button>
+      <ion-col col-4 style="padding-right: 30px;">
+        <ion-button class="booking-btn" (click)="navToBooking()"><strong>Book</strong></ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-footer>

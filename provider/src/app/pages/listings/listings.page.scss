@@ -12,6 +12,11 @@
   --background: transparent;
 }
 
+.tool-bar {
+  position: relative;
+  top: -7px;
+}
+
 .header-title-top {
   background-color: alpha($color: #000000);
   text-align: center;
@@ -24,6 +29,8 @@
   text-align: center;
   width: 100vw;
   height: 100%;
+  position: absolute;
+  top: -50px;
 }
 
 .header-img-top {

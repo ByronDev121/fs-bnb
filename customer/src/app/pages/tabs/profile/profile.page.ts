@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { User } from '../../../models';
 import { UserService, AuthService } from '../../../services';
@@ -10,7 +10,7 @@ import { UploadPage } from '../../../modals/upload/upload.page';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage {
+export class ProfilePage implements OnInit {
 
   public user: User = new User();
 
@@ -20,14 +20,18 @@ export class ProfilePage {
   public backDropClass: string;
   public profileView: boolean = false;
 
+  public loading: boolean;
+
   constructor(
     private userService: UserService,
     private modalController: ModalController,
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private authService: AuthService
-  ) {
+  ) { }
 
+  ngOnInit() {
+    this.loading = true;
     const userId = localStorage.getItem('userId');
     console.log(userId);
 
@@ -35,10 +39,10 @@ export class ProfilePage {
       if (err) {
         alert(err.message);
         return;
+      } else {
+        this.user = user;
       }
-
-      console.log(user.firstName);
-      this.user = user;
+      this.loading = false;
     };
 
     this.userService.getUserById(userId, callback);
@@ -90,10 +94,11 @@ export class ProfilePage {
     const modal = await this.modalController.create({
       component: UploadPage,
       componentProps: {
-        user: this.user
+        user: this.user,
+        that: this
       }
     });
-    return await modal.present()
+    return await modal.present();
   }
 
 }

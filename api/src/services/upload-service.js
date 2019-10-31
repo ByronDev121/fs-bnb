@@ -25,16 +25,20 @@ module.exports = class UploadService {
   upload(req) {
     return new Promise(async (resolve, reject) => {
       const filePath = path.join(__dirname, "../../", req.files.file.path);
-      let name = await gc.bucket.upload(filePath, {
-        gzip: true,
-        metadata: {
-          cacheControl: "public, max-age=31536000"
+      if (filePath) {
+        let name = await gc.bucket.upload(filePath, {
+          gzip: true,
+          metadata: {
+            cacheControl: "public, max-age=31536000"
+          }
+        });
+        if (name) {
+          resolve("https://storage.cloud.google.com/fs-bnb/" + name[0].name);
+        } else {
+          reject("Failed to upload to fire base");
         }
-      });
-      if (name) {
-        resolve("https://storage.cloud.google.com/fs-bnb/" + name[0].name);
       } else {
-        reject("Failed to up load to fire base");
+        reject("Failed to upload");
       }
     });
   }

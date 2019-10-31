@@ -17,16 +17,15 @@
     <input style="display: none" #fileInput type="file" name="avatar" (change)="onFileChange($event)" />
 
     <div>
-      <div *ngIf="fileAdded" class="image image-container" (click)="expandedImage = image.image">
+      <div *ngIf="image" class="image image-container" title="Add Image" (click)="fileInput.click()">
         <img class="img-upload" [src]="image">
       </div>
 
-      <div *ngIf="!fileAdded && user.imgUrl != null" class="image image-container" title="Add Image"
-        (click)="fileInput.click()">
+      <div *ngIf="!image" class="image image-container" title="Add Image" (click)="fileInput.click()">
         <img class="img-upload" [src]="user.imgUrl">
       </div>
     </div>
 
-    <ion-button [disabled]="!fileAdded" style="width:85%" type="submit">Upload</ion-button>
+    <ion-button [disabled]="!image" style="width:85%" type="submit">Upload</ion-button>
   </form>
 </ion-content>

@@ -1,16 +1,25 @@
 <ion-header>
+  <ion-toolbar class="toolbar-container">
+    <div class="flex-toolbar">
+      <ion-buttons class="back-arrow" slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <img class="header-img" src="assets/fs-bnb-logo.png">
+      </ion-title>
+    </div>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
+    <ion-title class="title">
       Profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div>
+  <ion-spinner *ngIf="loading" class="loading" name="dots"></ion-spinner>
+
+  <div *ngIf="!loading">
     <ion-item>
 
       <ion-grid style="padding: 10px 20px 10px 20px">

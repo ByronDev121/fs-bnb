@@ -16,12 +16,8 @@
       <nav class="col-md-2 d-md-block bg-light sidebar">
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
-            <li *ngFor="let navItem of navItems">
-
-              <button class="nav-link active btn btn-link" (click)="navTo(navItem)">
-                <span data-feather="home"></span>
-                {{navItem.name}} <span class="sr-only">(current)</span>
-              </button>
+            <li *ngFor="let item of navItems">
+              <button type="button" class="btn btn-link nav-link" (click)="navTo(item)">{{item.name}}</button>
             </li>
           </ul>
         </div>
@@ -32,10 +28,7 @@
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Dashboard</h1>
         </div>
-        <div>
-          <router-outlet></router-outlet>
-        </div>
-
+        <router-outlet></router-outlet>
       </main>
 
     </div>

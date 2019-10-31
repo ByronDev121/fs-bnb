@@ -35,8 +35,12 @@ import {
 })
 export class TripsPage {
 
-  public trips: Array<any> = [];
+  public pendingTrips: Array<any> = [];
+  public upcomingTrips: Array<any> = [];
+  public pastTrips: Array<any> = [];
+  public rejectedTrips: Array<any> = [];
   public tabsShow = 'in';
+  public loading: boolean;
 
   constructor(
     private navCtrl: NavController,
@@ -44,13 +48,31 @@ export class TripsPage {
     private bookingsService: BookingsService,
     private events: Events
   ) {
+
+  }
+
+  ionViewDidEnter() {
+    this.loading = true;
     const userId = parseInt(localStorage.getItem('userId'));
     this.bookingsService.getBookingsbyUserId(userId).then(bookings => {
-      this.trips = bookings;
+      this.pendingTrips = bookings.filter(x => x.status === 'pending');
+      this.rejectedTrips = bookings.filter(x => x.status === 'rejected');
+      const trips = bookings.filter(x => x.status !== 'pending' && x.status !== 'rejected');
+      trips.forEach(trip => {
+        const date = new Date(trip.dateTo.slice(0, 10));
+        if (date > new Date()) {
+          this.upcomingTrips.push(trip);
+        } else {
+          this.pastTrips.push(trip);
+        }
+      });
+      this.loading = false;
     }).catch(err => {
       this.presentAlert(err);
+      this.loading = false;
     });
   }
+
   openCloseTabs(event) {
     if (event.detail.scrollTop < 15 && this.tabsShow === 'out') {
       console.log(event);

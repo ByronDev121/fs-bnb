@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
-import { Booking, Listing, Chat, TextMessage } from '../../models';
-import { BookingsService, ListingService, ChatService } from '../../services';
 import { ActivatedRoute } from '@angular/router';
+import { NavController, AlertController } from '@ionic/angular';
+import { Booking, Listing, Chat, TextMessage, User } from '../../models';
+import { BookingsService, ListingService, ChatService, UserService } from '../../services';
 
 @Component({
   selector: 'app-booknow',
@@ -15,6 +15,8 @@ export class BooknowPage implements OnInit {
   public booking: Booking = new Booking();
   public chat: Chat = new Chat();
   public newMessage: TextMessage = new TextMessage();
+  public host: User;
+  public loading: boolean;
 
   constructor(
     private navCtrl: NavController,
@@ -22,23 +24,39 @@ export class BooknowPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private listingService: ListingService,
     private alertCtrl: AlertController,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.loading = true;
+    const userCallback = (err, user) => {
+      if (err) {
+        alert(err.error.message);
+      } else {
+        this.host = user;
+      }
+      this.loading = false;
+    };
+
     const listingsCallBack = (err, listing) => {
       if (err) {
         alert(err.error.message);
-        return;
+        this.loading = false;
+      } else {
+        this.listing = listing;
+        this.chat.providerId = this.listing.providerId;
+        this.userService.getUserById(this.listing.providerId, userCallback);
       }
-      this.listing = listing;
-      this.chat.providerUserId = this.listing.providerId;
+
     };
 
     const callBack = (data: any) => {
-      this.booking.listingId = data.params.listingID;
-      this.booking.userId = data.params.userID;
-      this.chat.userId = data.params.userID;
+      this.booking.listingId = data.params.listingId;
+      const userId = parseInt(data.params.userId);
+      this.booking.userId = userId;
+      this.chat.userId = userId;
+      this.newMessage.senderId = userId;
       this.listingService.getListingbyId(this.booking.listingId, listingsCallBack);
     };
 
@@ -56,37 +74,33 @@ export class BooknowPage implements OnInit {
 
   book() {
     this.booking.status = 'pending';
+    this.chat.messages.push(this.newMessage);
     this.bookingService.createBooking(this.booking).then(res => {
-      this.chat.messages.push(this.newMessage);
-      this.chatService.createNewChat(this.chat, (chatErr, chatres) => {
+      this.chatService.create(this.chat, (chatErr, chatRes) => {
         if (chatErr) {
           this.presentAlert(chatErr, null);
+        } else {
+          this.presentAlert(null, res);
+          this.navCtrl.navigateForward('tabs/trips');
         }
-        this.presentAlert(null, res);
-        this.navCtrl.navigateForward('tabs/trips');
       });
     }).catch(err => {
       this.presentAlert(err, null);
     });
   }
 
-  backtoListings() {
-    this.navCtrl.navigateForward('listing-details');
-  }
-
   async presentAlert(err, success) {
-    let header;
+    let title;
     let msg;
-    if (err == null) {
-      header = 'Error';
-      msg = err;
+    if (err !== null) {
+      title = 'Error';
+      // msg = err;
     } else {
-      header = 'Sucess';
-      msg = success;
+      title = 'Sucess';
+      // msg = success;
     }
     const alert = await this.alertCtrl.create({
-      header: header,
-      message: msg,
+      header: title,
       buttons: ['OK']
     });
 

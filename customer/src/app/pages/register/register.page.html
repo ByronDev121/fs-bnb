@@ -1,9 +1,9 @@
-<ion-header>
+<ion-header class="header">
   <ion-toolbar class="toolbar-container">
-    <div class="flex-toolbar">
-      <div class="back-arrow" (click)="navBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </div>
+    <div class="back-arrow" (click)="navBack()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </div>
+    <div class="image-container">
       <img class="header-img" src="assets/fs-bnb-logo.png">
     </div>
   </ion-toolbar>
@@ -17,7 +17,7 @@
 
 <ion-content>
 
-  <div class="container">
+  <div class="content-position">
     <div>
       <form (submit)="register()" #form="ngForm">
         <ion-grid>

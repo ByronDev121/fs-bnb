@@ -55,19 +55,18 @@ Booking.getAll = async function(result) {
 Booking.getById = async function(bookingId, result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query(
-        "Select * from booking where id = ? ",
-        bookingId,
-        function(err, res) {
-          if (err) {
-            console.log("error: ", err);
-            result(err, null);
-          } else {
-            result(null, res);
-          }
-          mysqlConn.release();
+      mysqlConn.query("Select * from booking where id = " + bookingId, function(
+        err,
+        res
+      ) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else {
+          result(null, res);
         }
-      );
+        mysqlConn.release();
+      });
     })
     .catch(err => {
       result(err, null);
@@ -78,8 +77,7 @@ Booking.getByUserId = async function(userId, result) {
   db.createConnection()
     .then(mysqlConn => {
       mysqlConn.query(
-        "Select * from booking where userId = ? ",
-        userId,
+        "Select * from booking where userId = " + userId,
         function(err, res) {
           if (err) {
             console.log("error: ", err);
@@ -99,19 +97,18 @@ Booking.getByUserId = async function(userId, result) {
 Booking.getByListingId = async function(id, result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query(
-        "Select * from booking where listingId = ? ",
-        id,
-        function(err, res) {
-          if (err) {
-            console.log("error: ", err);
-            result(err, null);
-          } else {
-            result(null, res);
-          }
-          mysqlConn.release();
+      mysqlConn.query("Select * from booking where listingId = " + id, function(
+        err,
+        res
+      ) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else {
+          result(null, res);
         }
-      );
+        mysqlConn.release();
+      });
     })
     .catch(err => {
       result(err, null);
@@ -143,7 +140,7 @@ Booking.updateById = async function(bookingId, booking, result) {
 Booking.deleteById = async function(bookingId, result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query("DELETE FROM booking WHERE id = ?", bookingId, function(
+      mysqlConn.query("DELETE FROM booking WHERE id = " + bookingId, function(
         err,
         res
       ) {

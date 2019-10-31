@@ -10,8 +10,9 @@ module.exports = class BookingService {
       Booking.getAll((err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -21,8 +22,9 @@ module.exports = class BookingService {
       Booking.getById(id, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res[0]);
         }
-        resolve(res[0]);
       });
     });
   }
@@ -73,8 +75,9 @@ module.exports = class BookingService {
       Booking.create(dBbooking, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -84,8 +87,9 @@ module.exports = class BookingService {
       Booking.updateById(booking.id, booking, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }
@@ -95,8 +99,9 @@ module.exports = class BookingService {
       Booking.remove(id, (err, res) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(res);
         }
-        resolve(res);
       });
     });
   }

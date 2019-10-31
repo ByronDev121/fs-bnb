@@ -7,16 +7,23 @@
   margin-bottom: 5px;
 }
 
-.buttons{
+.buttons {
   display: grid;
   grid-template-columns: 50% 50%;
 }
 
-.accept{
-  background-color: rgba(0, 132, 137, 0.7);
+.accepted {
+  background-color: #008489cc;
 }
 
-.reject{
-  background-color: rgba(0, 132, 137, 0.7);
-  --color-activated: rgb(0, 132, 137);
+.rejected {
+  background-color: #fe5e55;
+}
+
+.status-text {
+  text-align: center;
+  height: 50px;
+  font-size: 22px;
+  line-height: 50px;
+  color: white;
 }

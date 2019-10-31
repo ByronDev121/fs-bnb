@@ -15,9 +15,7 @@ export class AuthService {
 
     return new Promise((resolve, reject) => {
 
-      // const headers = new HttpHeaders();
-      // this.http.post(environment.BaseURL + '/api/auth/login', authUser, { headers }).subscribe((res: any) => {
-      this.http.post(environment.BaseURL + '/api/auth/login', authUser).subscribe((res: any) => {
+      this.http.post(environment.BaseURL + '/api/auth/login/user', authUser).subscribe((res: any) => {
         console.log(res);
 
         localStorage.setItem('isLoggedIn', 'true');
@@ -35,6 +33,7 @@ export class AuthService {
   }
 
   register(user, cb) {
+    user.role = 'user';
     this.http
       .post(environment.BaseURL + '/api/auth/register', user)
       .subscribe(

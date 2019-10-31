@@ -30,7 +30,7 @@
             <input style="display: none" #fileInput type="file" name="img" (change)="onFileChange($event)" />
             <div class="image-container">
 
-              <div *ngFor="let image of listing.imgUrl" class="image" (click)="expandedImage = image.image">
+              <div *ngFor="let image of listing.imgUrl" class="image" (click)="expandedImage = image">
                 <img class="img-upload" [src]="image">
                 <div class="image-close-button text-danger" (click)="clearImage(image)">
                   <ion-icon name="close"></ion-icon>

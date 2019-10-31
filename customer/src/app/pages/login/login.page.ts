@@ -122,7 +122,6 @@ export class LoginPage implements OnInit {
     this.authService.login(authUser).then(res => {
       const jwt = localStorage.getItem('jwt');
       const userId = localStorage.getItem('userId');
-      debugger;
       console.log(jwt, userId);
       this.fsAnime = false;
       setTimeout(() => {

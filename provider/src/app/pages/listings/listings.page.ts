@@ -51,6 +51,7 @@ export class ListingsPage implements OnInit {
   public listings: Array<Listing> = [];
   public displayListings: Array<Listing> = [];
   public rate = 3.5;
+  public loading: boolean;
 
   public imgShow = 'in';
   public menuShow = 'in';
@@ -68,6 +69,14 @@ export class ListingsPage implements OnInit {
     const userId = localStorage.getItem('userId');
     this.user.id = parseInt(userId);
     console.log(this.user.id);
+  }
+
+  ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.loading = true;
+    this.menuCtrl.enable(true);
 
     const callback = (err, listings) => {
       if (err) {
@@ -77,17 +86,10 @@ export class ListingsPage implements OnInit {
       console.log(listings);
       this.listings = listings;
       this.displayListings = listings;
+      this.loading = false;
     };
 
-    this.listingService.getListingsByProviderId(callback);
-
-  }
-
-  ngOnInit() {
-  }
-
-  ionViewWillEnter() {
-    this.menuCtrl.enable(true);
+    this.listingService.getListingsByProviderId(this.user.id, callback);
   }
 
   openCloseTabs(event) {
@@ -145,8 +147,7 @@ export class ListingsPage implements OnInit {
   navToListingDetails(listing: Listing) {
     this.navCtrl.navigateForward('listing-details', {
       queryParams: {
-        listingId: listing.id,
-        userId: this.user.id
+        listingId: listing.id
       }
     });
   }

@@ -6,18 +6,15 @@ const db = DB.instance();
 var Chat = function(chat) {
   this.id;
   this.userId = chat.userId;
-  this.userImgUrl = chat.userImgUrl;
-  this.providerUserId = chat.providerUserId;
-  this.providerUserImgUrl = chat.providerUserImgUrl;
-  this.providerUserName = chat.providerUserName;
-  this.latestTextId;
+  this.providerId = chat.providerId;
+  this.dateCreated = new Date();
 };
 
 // Object Methods
-Chat.create = function(newChatMsg, result) {
+Chat.create = function(chat, result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query("INSERT INTO chat set ?", newChatMsg, function(err, res) {
+      mysqlConn.query("INSERT INTO chat set ?", chat, function(err, res) {
         if (err) {
           console.log("error: ", err);
           result(err, null);
@@ -33,10 +30,49 @@ Chat.create = function(newChatMsg, result) {
     });
 };
 
-Chat.getByUserId = function(userId, result) {
+Chat.getAll = function(result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query("Select * from chat where userId = ? ", userId, function(
+      mysqlConn.query(`Select * from chat`, function(err, res) {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+        } else {
+          result(null, res);
+        }
+        mysqlConn.release();
+      });
+    })
+    .catch(err => {
+      result(err, null);
+    });
+};
+
+Chat.getByUserId = function(userType, id, result) {
+  db.createConnection()
+    .then(mysqlConn => {
+      mysqlConn.query(
+        `Select * from chat where ${userType}id = ` + id,
+        function(err, res) {
+          if (err) {
+            console.log("error: ", err);
+            result(err, null);
+          } else {
+            result(null, res);
+          }
+          mysqlConn.release();
+        }
+      );
+    })
+    .catch(err => {
+      result(err, null);
+    });
+};
+
+Chat.getById = function(id, result) {
+  db.createConnection()
+    .then(mysqlConn => {
+      mysqlConn.query(`Select * from chat where id = ` + id, function(
         err,
         res
       ) {
@@ -57,7 +93,7 @@ Chat.getByUserId = function(userId, result) {
 Chat.remove = function(ChatId, result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query("DELETE FROM chat WHERE id = ?", ChatId, function(
+      mysqlConn.query("DELETE FROM chat WHERE id = " + ChatId, function(
         err,
         res
       ) {

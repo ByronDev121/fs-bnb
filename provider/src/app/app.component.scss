@@ -1,4 +1,4 @@
- // App Styles
+// App Styles
 // ----------------------------------------------------------------------------
 // Put style rules here that you want to apply to the entire application. These
 // styles are for the entire app and not just one component. Additionally, this
@@ -12,9 +12,4 @@ ion-content {
 .active-item {
   background-color: rgba(0, 132, 137, 0.7);
   --color-activated: rgb(0, 132, 137);
-}
-
-.menu {
-  //--background: rgba(0, 132, 137, 0.7);
-  opacity: 0.95;
 }

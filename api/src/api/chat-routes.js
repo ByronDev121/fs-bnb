@@ -4,10 +4,11 @@ const router = express.Router();
 const ChatService = require("../services/chat-service");
 const chatService = new ChatService();
 
-router.get("/:userId", (req, res) => {
-  const userId = parseInt(req.params.userId);
+router.get("/:userType/:id", (req, res) => {
+  const userType = req.params.userType;
+  const id = parseInt(req.params.id);
   chatService
-    .getByUserId(userId)
+    .getByUserId(userType, id)
     .then(result => {
       res.send(result);
     })
@@ -16,10 +17,10 @@ router.get("/:userId", (req, res) => {
     });
 });
 
-router.get("/history/:userId", (req, res) => {
-  const userId = parseInt(req.params.userId);
+router.get("/:chatId", (req, res) => {
+  const chatId = req.params.chatId;
   chatService
-    .getByUserId(userId)
+    .getByChatId(chatId)
     .then(result => {
       res.send(result);
     })

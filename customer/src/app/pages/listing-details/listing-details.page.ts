@@ -12,10 +12,12 @@ import { NavController } from '@ionic/angular';
 
 export class ListingDetailsPage implements OnInit {
 
-  // public listing: Listing = new Listing(1, 'Apartment in Cape Town', 'Description', 'Cape Town - CBD', 750, 'assets/home1.jpg');
   public listing: Listing = new Listing();
   public amenities: Array<string> = [];
   public user: User = new User();
+  public showPhotos: boolean;
+  public showAmenities: boolean;
+  public loading: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -24,6 +26,7 @@ export class ListingDetailsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = true;
     const navParamCallBack = (data: any) => {
       this.listing.id = data.params.listingId;
       this.user.id = data.params.userId;
@@ -37,20 +40,20 @@ export class ListingDetailsPage implements OnInit {
       }
       this.listing = listing;
       this.amenities = JSON.parse(listing.amenities);
+      this.loading = false;
     };
     this.listingService.getListingbyId(this.listing.id, listingsCallBack);
   }
 
   navBack() {
-    // this.navCtrl.navigateBack('tabs/explorer');
     this.navCtrl.pop();
   }
 
   navToBooking() {
     this.navCtrl.navigateForward('booknow', {
       queryParams: {
-        listingID: this.listing.id,
-        userID: this.user.id
+        listingId: this.listing.id,
+        userId: this.user.id
       }
     });
   }

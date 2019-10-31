@@ -17,10 +17,10 @@ router.post("/register", (req, res) => {
     });
 });
 
-router.post("/login", (req, res) => {
-  console.log("Login request from", req.body.email);
+router.post("/login/:platform", (req, res) => {
+  const platfrom = req.params.platform;
   authService
-    .login(req.body)
+    .login(req.body, platfrom)
     .then(jwt => {
       console.log("res:", jwt);
       res.json(jwt);

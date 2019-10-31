@@ -40,7 +40,7 @@ export class RegisterPage implements OnInit {
         alert(err.error.message);
         return;
       } else {
-        this.navCtrl.navigateForward('main/tabs/explorer');
+        this.navCtrl.navigateForward('listings');
       }
     };
 

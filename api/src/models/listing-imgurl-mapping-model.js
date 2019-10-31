@@ -60,8 +60,7 @@ ListingImgMapping.getById = function(id, result) {
   db.createConnection()
     .then(mysqlConn => {
       mysqlConn.query(
-        "Select * from listing_imgurl_mapping where id = ? ",
-        id,
+        "Select * from listing_imgurl_mapping where id = " + id,
         function(err, res) {
           if (err) {
             console.log("error: ", err);
@@ -104,8 +103,7 @@ ListingImgMapping.remove = function(id, result) {
   db.createConnection()
     .then(mysqlConn => {
       mysqlConn.query(
-        "DELETE FROM listing_imgurl_mapping WHERE id = ?",
-        id,
+        "DELETE FROM listing_imgurl_mapping WHERE id = " + id,
         function(err, res) {
           if (err) {
             console.log("error: ", err);

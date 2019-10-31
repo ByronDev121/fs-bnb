@@ -58,7 +58,7 @@ User.getAll = function(result) {
 User.getById = async function(userId, result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query("Select * from user where id = ? ", userId, function(
+      mysqlConn.query("Select * from user where id = " + userId, function(
         err,
         res
       ) {
@@ -131,7 +131,7 @@ User.updateImageById = async function(userId, imgUrl, result) {
 User.remove = async function(userId, result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query("DELETE FROM user WHERE id = ?", userId, function(
+      mysqlConn.query("DELETE FROM user WHERE id = " + userId, function(
         err,
         res
       ) {

@@ -17,7 +17,7 @@ export class ChatService {
     httpHeaders = httpHeaders.set('Content-Type', 'application/json');
     httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
     this.httpClient
-      .get(environment.BaseURL + '/api/chat/' + userId, { headers: httpHeaders })
+      .get(environment.BaseURL + '/api/chat/user/' + userId, { headers: httpHeaders })
       .subscribe(
         (response) => {
           console.log(response);
@@ -31,12 +31,49 @@ export class ChatService {
       );
   }
 
-  createNewChat(chat, cb) {
+  getByChatId(id, cb) {
     let httpHeaders = new HttpHeaders();
     httpHeaders = httpHeaders.set('Content-Type', 'application/json');
     httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
     this.httpClient
-      .post(environment.BaseURL + '/api/chat/' + chat, { headers: httpHeaders })
+      .get(environment.BaseURL + '/api/chat/' + id, { headers: httpHeaders })
+      .subscribe(
+        (response) => {
+          console.log(response);
+          return cb(null, response);
+        },
+        (err) => {
+          console.log(err);
+          return cb(err, null);
+        }
+      );
+  }
+
+  create(chat, cb) {
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
+    this.httpClient
+      .post(environment.BaseURL + '/api/chat/', chat, { headers: httpHeaders })
+      .subscribe(
+        (response) => {
+          console.log(response);
+          return cb(null, response);
+        },
+        (err) => {
+          console.log(err);
+          return cb(err, null);
+
+        }
+      );
+  }
+
+  sendMessage(textMessage, cb) {
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
+    this.httpClient
+      .post(environment.BaseURL + '/api/chat/history', textMessage, { headers: httpHeaders })
       .subscribe(
         (response) => {
           console.log(response);

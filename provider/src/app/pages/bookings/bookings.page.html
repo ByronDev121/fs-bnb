@@ -1,46 +1,83 @@
 <ion-header>
   <ion-toolbar class="toolbar-container">
     <div class="flex-toolbar">
-      <div class="back-arrow" (click)="navBack()">
+      <div *ngIf="listingName" class="back-arrow" (click)="navBack()">
         <ion-icon name="arrow-back"></ion-icon>
       </div>
-      <ion-title>Bookings</ion-title>
+      <ion-buttons *ngIf="!listingName" class="back-arrow" slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <img class="header-img" src="assets/fs-bnb-logo.png">
+      </ion-title>
     </div>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="title">
+      Bookings
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-card *ngFor="let booking of bookings">
-      <ion-card-header>
-        <ion-card-title>User ID: {{booking.userId}}</ion-card-title>
-        <p></p>
-        <ion-card-subtitle>
-          <div class="text">
-            Booking request dates:
-          </div>
 
-          <div class="text">
-            <div>
-              From: {{booking.dateFrom}}
-            </div>
-            <div>
-              To: {{booking.dateTo}}
-            </div>
-          </div>
+  <ion-spinner *ngIf="loading" class="loading" name="dots"></ion-spinner>
 
-          <div class="text">
-            Booking Status: {{booking.status}}
-          </div>
-        </ion-card-subtitle>
-      </ion-card-header>
+  <div *ngIf="!loading">
+    <h2 *ngIf="!listingName">All Bookings</h2>
+    <h2 *ngIf="listingName">{{listingName}}</h2>
 
-      <div class="buttons">
-        <ion-button color="light" (click)="updateBooking('accept', booking)">Accept Booking</ion-button>
-        <ion-button color="medium" (click)="updateBooking('reject', booking)">Deny Booking</ion-button>
-      </div>
+    <div *ngIf="!bookings">
+    </div>
 
-    </ion-card>
-  </ion-list>
+    <ion-list>
+      <ion-card *ngFor="let booking of bookings">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-grid>
+              <ion-row>
+                <ion-col size='6'>
+                  Listing ID: {{booking.listingId}}
+                </ion-col>
+                <ion-col size='6'>
+                  User ID: {{booking.userId}}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-title>
+          <ion-card-subtitle>
+
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  Booking request dates:
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size='6'>
+                  From: {{booking.dateFrom.slice(0,10)}}
+                </ion-col>
+                <ion-col size='6'>
+                  To: {{booking.dateTo.slice(0,10)}}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </ion-card-subtitle>
+        </ion-card-header>
+
+        <div class="buttons" *ngIf="booking.status == 'pending'">
+          <ion-button color="light" (click)="updateBooking('accepted', booking)">Accept Booking</ion-button>
+          <ion-button color="medium" (click)="updateBooking('rejected', booking)">Deny Booking</ion-button>
+        </div>
+        <div class="accepted status-text" *ngIf="booking.status == 'accepted'">
+          Accepted
+        </div>
+        <div class="rejected status-text" *ngIf="booking.status == 'rejected'">
+          Rejected
+        </div>
+      </ion-card>
+    </ion-list>
+  </div>
 
 </ion-content>

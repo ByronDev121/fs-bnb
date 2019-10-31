@@ -1,0 +1,15 @@
+.chart-container {
+  margin-top: 20px;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.graph-title {
+  color: purple;
+}
+
+.double-chart-container {
+  display: block;
+  padding: 50px;
+}

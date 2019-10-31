@@ -124,7 +124,7 @@ Listing.getById = function(listingId, result) {
 Listing.getByProviderId = function(id, result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query("Select * from listing where providerId ?", id, function(
+      mysqlConn.query("Select * from listing where providerId =" + id, function(
         err,
         res
       ) {
@@ -132,29 +132,30 @@ Listing.getByProviderId = function(id, result) {
           console.log("error: ", err);
           result(err, null);
           mysqlConn.release();
-        }
-        let listings = res;
-        mysqlConn.query(
-          "SELECT * FROM listing_imgurl_mapping WHERE listingId IN (SELECT id FROM listing);",
-          function(err, res) {
-            if (err) {
-              console.log("error: ", err);
-              result(err, null);
-            } else {
-              listings.forEach(listing => {
-                listing.imgUrl = [];
-                res.forEach(imgUrl => {
-                  if (imgUrl.listingId == listing.id) {
-                    listing.imgUrl.push(imgUrl.imgUrl);
-                  }
+        } else {
+          let listings = res;
+          mysqlConn.query(
+            "SELECT * FROM listing_imgurl_mapping WHERE listingId IN (SELECT id FROM listing);",
+            function(err, res) {
+              if (err) {
+                console.log("error: ", err);
+                result(err, null);
+              } else {
+                listings.forEach(listing => {
+                  listing.imgUrl = [];
+                  res.forEach(imgUrl => {
+                    if (imgUrl.listingId == listing.id) {
+                      listing.imgUrl.push(imgUrl.imgUrl);
+                    }
+                  });
                 });
-              });
-              console.log("Users : ", res);
-              result(null, listings);
+                console.log("Users : ", res);
+                result(null, listings);
+              }
+              mysqlConn.release();
             }
-            mysqlConn.release();
-          }
-        );
+          );
+        }
       });
     })
     .catch(err => {
@@ -193,7 +194,7 @@ Listing.updateUserById = function(listingId, listing, result) {
 Listing.remove = function(listingId, result) {
   db.createConnection()
     .then(mysqlConn => {
-      mysqlConn.query("DELETE FROM listing WHERE id = ?", listingId, function(
+      mysqlConn.query("DELETE FROM listing WHERE id = " + listingId, function(
         err,
         res
       ) {

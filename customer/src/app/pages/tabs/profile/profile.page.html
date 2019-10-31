@@ -11,12 +11,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="content-position">
+<ion-content>
 
-  <div>
+  <ion-spinner *ngIf="loading" class="loading" name="dots"></ion-spinner>
+
+  <div *ngIf="!loading" class="content-position">
     <ion-item>
-
-
       <ion-grid style="padding: 10px 20px 10px 20px">
         <ion-row>
           <ion-col col="8">

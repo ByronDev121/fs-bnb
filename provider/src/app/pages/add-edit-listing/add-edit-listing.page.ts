@@ -30,7 +30,7 @@ export class AddEditListingPage implements OnInit {
       if (this.type === 'edit') {
         this.listing.id = data.params.listingId;
       } else {
-        this.listing.providerId = parseInt(localStorage.getItem('userId'), 6);
+        this.listing.providerId = parseInt(localStorage.getItem('userId'));
       }
     };
     this.activatedRoute.queryParamMap.subscribe(navParamCallBack);
@@ -57,7 +57,7 @@ export class AddEditListingPage implements OnInit {
   }
 
   clearImage(image) {
-    // TODO: clear image
+    this.listing.imgUrl = this.listing.imgUrl.filter(x => x !== image);
   }
 
   plus(val) {

@@ -6,16 +6,9 @@ export const environment = {
   production: false,
   // Heroku
   // BaseURL: 'https://fs-bnb-app.herokuapp.com'
-  // BaseURL: 'https://new-fs-bnb-1.herokuapp.com'
 
   // Huawei router
   // BaseURL: 'http://192.168.8.101:3000'
-
-  // Wifight router
-  // BaseURL: 'http://192.168.0.192:3000'
-
-  // Village and Life - Cannot reach this as it is an external IP address: i.e. not 192.168..
-  // BaseURL: 'http://10.5.50.238:3000'
 
   // local host
   BaseURL: 'http://localhost:3000'

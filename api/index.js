@@ -10,30 +10,29 @@ const app = express();
 // CORS(Cross-Origin-Resource-Sharing) - Allows us to access from device
 app.use(cors());
 
+// Middleware:
 // Body Parser Middlware:
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// Middleware:
+// Auth
 app.use("*", jwtAuth);
-
+// Image uploading
 const multipartMiddleware = multipart({ uploadDir: "./uploads" });
 
 // Image hosting:
 app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
 
-// Progressive web app hosting:
-// app.use(express.static(path.join(__dirname, "dist")));
-
-/* app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist/index.html"));
-}); */
+// Admin panel app hosting:
+app.use(express.static(path.join(__dirname, "dist")));
 
 // Routes:
 app.use("/api/auth", require("./src/api/auth-routes"));
 app.use("/api/user", multipartMiddleware, require("./src/api/user-routes"));
-app.use("/api/provider", require("./src/api/provider-routes"));
-app.use("/api/listing", multipartMiddleware, require("./src/api/listing-routes"));
+app.use(
+  "/api/listing",
+  multipartMiddleware,
+  require("./src/api/listing-routes")
+);
 app.use("/api/booking", require("./src/api/booking-routes"));
 app.use("/api/chat", require("./src/api/chat-routes"));
 

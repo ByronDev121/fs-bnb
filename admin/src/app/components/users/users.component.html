@@ -3,6 +3,7 @@
   <table class="table table-striped table-sm">
     <thead>
       <tr>
+        <th></th>
         <th>Name</th>
         <th>Last Name</th>
         <th>Email</th>
@@ -11,11 +12,19 @@
     </thead>
     <tbody>
       <tr class="table-row" *ngFor="let user of users">
-        <td>{{user.name}}</td>
-        <td>{{user.lastName}}</td>
-        <td>{{user.email}}</td>
-        <td>+27 0{{user.cellPhone}}</td>
+        <td><img class="avatar" [src]="user.imgUrl"></td>
+        <td> {{user.firstName}}</td>
+        <td> {{user.lastName}}</td>
+        <td> {{user.email}}</td>
+        <td>+27 {{user.cellPhone}}</td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div>
+  <div class="chart"><strong class="graph-title">New Users Registered Monthly</strong><canvas baseChart
+      [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+      [chartType]="barChartType" (chartClick)="chartClicked($event)"></canvas></div><button class="btn btn-primary"
+    (click)="randomize()">Update</button>
 </div>

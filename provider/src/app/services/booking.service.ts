@@ -38,7 +38,7 @@ export class BookingService {
     httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
     return new Promise((resolve, reject) => {
       this.httpClient
-        .get(environment.BaseURL + '/api/booking/', { headers: httpHeaders })
+        .get(environment.BaseURL + '/api/booking/' + localStorage.getItem('userId'), { headers: httpHeaders })
         .subscribe(
           (response) => {
             console.log(response);
@@ -77,8 +77,9 @@ export class BookingService {
       let httpHeaders = new HttpHeaders();
       httpHeaders = httpHeaders.set('Content-Type', 'application/json');
       httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
+      debugger;
       this.httpClient
-        .post(environment.BaseURL + '/api/bookings/update/', booking, { headers: httpHeaders })
+        .post(environment.BaseURL + '/api/booking/update', booking, { headers: httpHeaders })
         .subscribe(
           (response) => {
             console.log(response);

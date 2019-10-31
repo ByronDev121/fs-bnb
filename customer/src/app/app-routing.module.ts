@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
   { path: 'listing-details', loadChildren: './pages/listing-details/listing-details.module#ListingDetailsPageModule' },
   { path: 'booknow', loadChildren: './pages/booknow/booknow.module#BooknowPageModule' },
-  { path: 'upload', loadChildren: './modals/upload/upload.module#UploadPageModule' },
   { path: 'chat', loadChildren: './pages/chat/chat.module#ChatPageModule' },
 
 ];

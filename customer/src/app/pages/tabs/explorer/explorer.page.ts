@@ -44,6 +44,7 @@ export class ExplorerPage {
 
   public tabsShow = 'in';
   public search = 'search-top';
+  public loading: boolean;
 
   constructor(
     private navCtrl: NavController,
@@ -52,18 +53,21 @@ export class ExplorerPage {
     private events: Events
 
   ) {
-    const userId = localStorage.getItem('userId')
+    this.loading = true;
+    const userId = localStorage.getItem('userId');
     this.user.id = parseInt(userId);
     console.log(this.user.id);
 
     const callback = (err, listings) => {
       if (err) {
         alert(err.error.message);
-        return;
+
+      } else {
+        console.log(listings);
+        this.listings = listings;
+        this.displayListings = listings;
       }
-      console.log(listings);
-      this.listings = listings;
-      this.displayListings = listings;
+      this.loading = false;
     };
 
     this.listingService.getAllListings(callback);
@@ -87,12 +91,10 @@ export class ExplorerPage {
       console.log(event);
       this.tabsShow = 'out';
       this.events.publish('tabs:open-close', 'hide', Date.now());
-    }
-    else if (event.detail.scrollTop > 322 && this.search === 'search-top') {
+    } else if (event.detail.scrollTop > 322 && this.search === 'search-top') {
       console.log(event);
       this.search = 'search';
-    }
-    else if (event.detail.scrollTop < 322 && this.search === 'search') {
+    } else if (event.detail.scrollTop < 322 && this.search === 'search') {
       console.log(event);
       this.search = 'search-top';
     }
