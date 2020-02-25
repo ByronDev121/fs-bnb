@@ -8,7 +8,7 @@ module.exports = class GC {
   constructor() {
     const config = {
       projectId: "fs-bnb",
-      keyFilename: "C:Users/toast/Downloads/fs-bnb-2ec1e2f35716.json"
+      keyFilename: "C:Users/toast/Downloads/fs-bnb-5cd107ba96ca.json"
     };
 
     const gc = new Storage(config);

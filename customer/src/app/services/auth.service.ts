@@ -28,7 +28,6 @@ export class AuthService {
           reject(err.error.msg);
         }
       );
-
     });
   }
 

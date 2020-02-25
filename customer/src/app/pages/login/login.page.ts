@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { AuthService } from '../../services';
-import { AlertController } from '@ionic/angular';
-import { User } from '../../models';
-
 import {
   trigger,
   state,
@@ -11,6 +7,10 @@ import {
   animate,
   transition
 } from '@angular/animations';
+
+import { AlertController } from '@ionic/angular';
+
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-login',
@@ -110,9 +110,10 @@ export class LoginPage implements OnInit {
     }
   }
 
-  click() {
-    this.loginBtn = "login-btn-active";
-  }
+  // click() {
+  //   this.loginBtn = "login-btn-active";
+  // }
+
   login() {
     const authUser = {
       email: this.email,
